@@ -1,0 +1,32 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5vh;
+  padding: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+.item:hover {
+  background-color: rgb(163, 163, 163);
+  color: white;
+}
+
+.item + .item {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.deleteIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 14px;
+}
+.deleteIcon:hover {
+  color: black;
+}
+
+.deleteSystemPopUp {
+  text-align: justify;
+  max-height: 10rem;
+  overflow: auto;
+}

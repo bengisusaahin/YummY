@@ -1,0 +1,33 @@
+.body {
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.auth {
+  position: relative;
+  width: 100%;
+  max-width: 23rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.auth h1 {
+  font-size: 120%;
+  color: rgb(105, 105, 105);
+  margin: 4rem 0 2rem 0;
+}
+
+.error {
+  color: red;
+  font-size: small;
+  text-align: left;
+}
+span {
+  margin-left: 0.5rem;
+}

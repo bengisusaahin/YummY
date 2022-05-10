@@ -1,0 +1,66 @@
+/* initial height */
+:root {
+  --height: 8.2vh;
+  --mt: 2vh;
+  --fs: calc(var(--height) / 4.5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.input__div {
+  position: relative;
+  text-align: left;
+  height: var(--height);
+}
+
+.form__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--height) - var(--mt));
+  font-size: var(--fs);
+  border: 1px solid #e1e5ee;
+  border-radius: 4px;
+  outline: none;
+  padding: 0 calc(var(--height) / 3.5);
+  background: none;
+  margin-top: var(--mt);
+}
+
+.form__input:hover {
+  cursor: text;
+}
+.form__input:focus {
+  border: 2px solid rgba(13, 110, 253, 0.9);
+}
+.form__input:focus ~ .form__label {
+  color: rgba(13, 110, 253, 0.9);
+}
+.form__label {
+  position: absolute;
+  left: calc(var(--height) / 3);
+  top: calc((var(--height) - var(--mt)) / 2 + var(--mt) - var(--fs) / 1.33);
+  font-size: var(--fs);
+  color: #696969;
+  cursor: text;
+  transition: 150ms ease-in;
+  background-color: #ffffff;
+  user-select: none;
+}
+/* 1. When the input is in the focus state reduce the size of the label and move upwards 
+2. Keep label state when content is in input field */
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
+  top: calc(var(--mt) / 1.75);
+  left: calc(var(--height) / 5);
+  font-size: calc(var(--fs) * 0.85);
+  font-weight: 500;
+  padding: 0 calc(var(--fs) / 2);
+}

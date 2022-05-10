@@ -1,0 +1,41 @@
+.deletePopUpButtons {
+  display: flex;
+  justify-content: right;
+  justify-content: space-between 2px;
+  padding-top: 1rem;
+}
+
+.checkBoxDiv {
+  margin-top: 1rem;
+  text-align: left;
+  font-weight: bolder;
+  user-select: none;
+  cursor: pointer;
+}
+
+.checkBox {
+  margin-right: 0.6rem;
+}
+
+.deleteButtonCss {
+  background-color: white !important;
+  color: #dc3545 !important;
+  border: 1px solid #dc3545 !important;
+  margin-right: 2vw;
+}
+.deleteButtonCss:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.cancelButtonCss {
+  background-color: white !important;
+  color: #666666 !important;
+  border: 1px solid #575757 !important;
+}
+.cancelButtonCss:hover {
+  background-color: #575757 !important;
+  color: white !important;
+  cursor: pointer;
+}

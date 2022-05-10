@@ -1,0 +1,44 @@
+.item {
+  padding: 0.5rem 1rem;
+  margin: 0;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  text-align: left;
+  min-height: 3.5rem;
+}
+
+.item + .item {
+  border-top: 1px solid rgb(230, 230, 230);
+}
+.item:hover {
+  background-color: rgb(230, 230, 230) !important;
+  border-color: rgb(260, 260, 260);
+  border-left-color: rgb(190, 190, 190);
+}
+.item:hover + .item {
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
+.item:hover select {
+  background-color: rgb(230, 230, 230);
+}
+.item select {
+  background-color: transparent;
+}
+.item:hover select option {
+  background-color: white;
+}
+
+.object {
+  padding: 0;
+  display: grid;
+  align-items: center;
+}
+.subRow {
+  border-left: 10px rgb(190, 190, 190) solid;
+  padding-left: 6px;
+}
+.text {
+  overflow-wrap: break-word;
+}
