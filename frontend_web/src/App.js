@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import AuthContext from "./store/auth-context";
 import UserContext from "./store/user-context";
-import Admin from "./pages/Swoc/Admin";
+import Admin from "./pages/Admin/Admin";
 
 const App = () => {
   const authCtx = useContext(AuthContext);

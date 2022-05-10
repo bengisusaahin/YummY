@@ -120,7 +120,7 @@ const Admin = () => {
     setIsDeletePopUpOpened(false);
     try {
       const deleteUser = await fetch(
-        `http://localhost:3002/userDelete/${data.userid}`,
+        `http://localhost:3002/deleteUser/${data.userid}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
