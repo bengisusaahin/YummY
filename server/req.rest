@@ -1,0 +1,80 @@
+GET http://localhost:3002/users_temp
+###
+
+GET http://localhost:3002/users
+
+
+###
+GET http://localhost:3002/getDomains
+###
+
+###
+GET http://localhost:3002/getPlatforms/1
+###
+
+###
+GET http://localhost:3002/getSubPlatforms/1
+###
+###
+GET http://localhost:3002/getSystems/1_subPlatform
+###
+
+POST http://localhost:3002/systems
+Content-Type: application/json
+
+{
+  "domain": "2"
+}
+
+
+###
+POST http://localhost:3002/logbook
+Content-Type: application/json
+
+{
+  "module": "logbook_owl",
+  "startDate": "",
+  "endDate": "",
+  "user_id": "jkhjk"
+}
+
+###
+
+POST http://localhost:3002/signup
+Content-Type: application/json
+
+{
+  "user_id": "1",
+  "user_name": "mustafa silmeV2",
+  "user_role": "Database Manager",
+  "user_password": "1"
+}
+
+###
+
+POST http://localhost:3002/update_role
+Content-Type: application/json
+
+{
+  "user_id": "6271",
+  "user_role": "asdfsdfasdf"
+}
+
+###
+POST http://localhost:3002/loginAddLog
+Content-Type: application/json
+{
+  "user_id": "1",
+  "user_name": "1",
+  "user_action": "1",
+  "date": "new Date()"
+}
+###
+
+POST http://localhost:3002/login
+Content-Type: application/json
+
+  {
+    "user_id": "1",
+    "user_password": "1"
+  }
