@@ -1,6 +1,5 @@
 import { useState, useRef, useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import UserContext from "../../store/user-context";
 
 import classes from "./Login.module.css";
 import Input from "../../components/UI/Inputs/Input";
@@ -10,7 +9,6 @@ const Login = (props) => {
   const idInputRef = useRef();
   const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
-  const userCtx = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isidEmpty, setIsidEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);

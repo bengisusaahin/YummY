@@ -2,15 +2,19 @@ import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import AuthContext from "./store/auth-context";
-import UserContext from "./store/user-context";
 import Admin from "./pages/Admin/Admin";
+import Waiter from "./pages/Waiter/WaiterHomepage";
+import Chef from "./pages/Chef/ChefHomepage";
+import Cashier from "./pages/Cashier/CahshierHomepage";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = true;
 
-  const userCtx = useContext(UserContext);
-  const isManager = userCtx.isManager;
+  const isAdmin = false;
+  const isWaiter = true;
+  const isChef = false;
+  const isCashier = false;
 
   const navTo = (comp) => {
     return isLoggedIn ? comp : <Navigate to="/login" />;
@@ -20,12 +24,27 @@ const App = () => {
     <>
       <div style={{ overflowY: "auto", height: "100vh" }}>
         <Routes>
-          <Route path="*" element={<Navigate to="/" />} />
           {!isLoggedIn && <Route path="login" element={<Login />} />}
           {/* ----------------------------- */}
-          {isManager && (
+
+          {isAdmin && (
             <>
               <Route path="/" element={navTo(<Admin />)} />
+            </>
+          )}
+          {isWaiter && (
+            <>
+              <Route path="/" element={navTo(<Waiter />)} />
+            </>
+          )}
+          {isChef && (
+            <>
+              <Route path="/" element={navTo(<Chef />)} />
+            </>
+          )}
+          {isCashier && (
+            <>
+              <Route path="/" element={navTo(<Cashier />)} />
             </>
           )}
         </Routes>
