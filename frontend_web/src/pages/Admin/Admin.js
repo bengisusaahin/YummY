@@ -12,7 +12,7 @@ import Toast, { success, error } from "../../components/UI/Toast/Toaster";
 import ConfirmationPopUp from "../../components/UI/PopUp/ConfirmationPopUp";
 const Admin = () => {
   const roles = ["Admin", "Waiter", "Cashier", "Chef"];
-  const rowLength = [3, 4, 4, 1];
+  const rowLength = [1, 2, 3, 2, 3, 1];
   const rowLengthPopUp = [3, 4, 4, 1];
   const [searchValue, setSearchValue] = useState("");
   const [users, setUsers] = useState([]);
@@ -24,6 +24,8 @@ const Admin = () => {
   const [isRoleChangePopUpOpened, setIsRoleChangePopUpOpened] = useState(false);
   const [userToChangeRole, setUserToChangeRole] = useState({});
   const [userRoleToBeChanged, setUserRoleToBeChanged] = useState(null);
+
+  const [generatedPassword, setGeneratedPassword] = useState("");
 
   const onSearchValueChanged = (value) => {
     setSearchValue(value);
@@ -50,26 +52,34 @@ const Admin = () => {
       col: rowLength[1],
     },
     {
+      name: "User Email",
+      col: rowLength[2],
+    },
+    {
       name: "User Role",
-      col: rowLength[2],
+      col: rowLength[3],
+    },
+    {
+      name: "Encrypted Password",
+      col: rowLength[4],
     },
   ];
-  const headerDataPopUp = [
-    {
-      name: "User ID",
-      col: rowLength[0],
-    },
-    {
-      name: "Name",
-      col: rowLength[1],
-    },
-    {
-      name: "Title",
-      col: rowLength[2],
-    },
-  ];
+  // const headerDataPopUp = [
+  //   {
+  //     name: "User ID",
+  //     col: rowLength[0],
+  //   },
+  //   {
+  //     name: "Name",
+  //     col: rowLength[1],
+  //   },
+  //   {
+  //     name: "Title",
+  //     col: rowLength[2],
+  //   },
+  // ];
 
-  headerData[3] = {
+  headerData[5] = {
     name: (
       <IconButton iconButton={<AiOutlineUserAdd />} onClick={popUpHandler} />
     ),
@@ -83,7 +93,7 @@ const Admin = () => {
     data.map((data) =>
       newDatas.push({
         userid: data.userid,
-        name: data.username,
+        name: data.userName,
         title: data.user_title,
 
         button: (
@@ -120,15 +130,15 @@ const Admin = () => {
     setIsDeletePopUpOpened(false);
     try {
       const deleteUser = await fetch(
-        `http://localhost:3002/deleteUser/${data.userid}`,
+        `http://localhost:3002/userDelete/${data.userid}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userid: data.userid,
-            username: data.username,
-            userrole: data.userrole,
-            manager_name: localStorage.getItem("username"),
+            userName: data.userName,
+            userRole: data.userRole,
+            manager_name: localStorage.getItem("userName"),
             manager_id: localStorage.getItem("userid"),
           }),
         }
@@ -136,7 +146,7 @@ const Admin = () => {
         if (response.statusText.includes("OK")) {
           setUsers(users.filter((item) => item.userid !== data.userid));
 
-          success("You have successfully deleted user " + data.username);
+          success("You have successfully deleted user " + data.userName);
         } else {
           throw new Error("User not found!");
         }
@@ -157,27 +167,27 @@ const Admin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userid: data.userid,
-          username: data.username,
-          userrole: userRoleToBeChanged,
-          user_old_role: data.userrole,
+          userName: data.userName,
+          userRole: userRoleToBeChanged,
+          user_old_role: data.userRole,
         }),
       });
       setIsRoleChangePopUpOpened(false);
       success(
         "You have successfully changed user " +
           data.userid +
-          "'s userrole to " +
+          "'s userRole to " +
           userRoleToBeChanged
       );
       setUsers([
         ...users.slice(0, users.indexOf(data)),
-        { ...data, userrole: userRoleToBeChanged },
+        { ...data, userRole: userRoleToBeChanged },
         ...users.slice(users.indexOf(data) + 1),
       ]);
     } catch (err) {
       setIsRoleChangePopUpOpened(false);
       error(
-        "An error happened when changing user " + data.userid + "'s userrole"
+        "An error happened when changing user " + data.userid + "'s userRole"
       );
 
       console.log(err.message);
@@ -188,8 +198,24 @@ const Admin = () => {
       userUpdate(data);
     }
   };
-  const changeRoleSelectHandler = (userrole) => {
-    setUserRoleToBeChanged(userrole);
+  const changeRoleSelectHandler = (userRole) => {
+    setUserRoleToBeChanged(userRole);
+  };
+
+  const label = (labelName) => {
+    return <div className={classes.label}>{labelName}</div>;
+  };
+
+  const generatePasswordClickHandler = () => {
+    var chars =
+      "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var passwordLength = 10;
+    var password = "";
+    for (var i = 0; i <= passwordLength; i++) {
+      var randomNumber = Math.floor(Math.random() * chars.length);
+      password += chars.substring(randomNumber, randomNumber + 1);
+    }
+    setGeneratedPassword(password);
   };
 
   return (
@@ -208,12 +234,13 @@ const Admin = () => {
           .filter(
             (data) =>
               (data.userid + "").includes(searchValue) ||
-              data.username.toLowerCase().includes(searchValue.toLowerCase())
+              data.userName.toLowerCase().includes(searchValue.toLowerCase())
           )
           .map((data) => ({
             userid: data.userid,
-            name: data.username,
-            userrole: (
+            name: data.userName,
+            email: data.userEmail,
+            userRole: (
               <Select
                 onClick={(e) => {
                   e.stopPropagation();
@@ -228,11 +255,12 @@ const Admin = () => {
                 dValue={
                   data.userid === userToChangeRole.userid
                     ? userRoleToBeChanged
-                    : data.userrole
+                    : data.userRole
                 }
                 cSelect={classes.select}
               />
             ),
+            encryptedPassword: data.encryptedPassword,
             button: (
               <IconButton
                 onClick={() => deletePopUpHandler(data)}
@@ -256,7 +284,7 @@ const Admin = () => {
           }}
           text={
             <p>
-              {`Do you approve deleting user ${toBeDeletedItem.username} with id ${toBeDeletedItem.userid}?`}
+              {`Do you approve deleting user ${toBeDeletedItem.userName} with id ${toBeDeletedItem.userid}?`}
             </p>
           }
           confirmationBoxText={"I read and agree the responsible"}
@@ -275,7 +303,7 @@ const Admin = () => {
           }}
           text={
             <p>
-              {`Do you approve changing userrole for user ${userToChangeRole.username}`}
+              {`Do you approve changing userRole for user ${userToChangeRole.userName}`}
               ?
             </p>
           }
@@ -287,33 +315,43 @@ const Admin = () => {
       <div>
         {isInfoOpened && (
           <Popup
-            title="TÄąrpan Employees"
+            title="Add User"
             message={
               <>
-                <div className={classes.searchBoxContainer}>
-                  <SearchBox
-                    onSearchValueChanged={onSearchValueChanged}
-                    search="Search"
+                <div>
+                  {label("User Name:")}
+                  <input
+                    className={classes.input}
+                    type="text"
+                    id="FeatureInput"
+                    placeholder="User Name"
                   />
+
+                  {label("User E-mail:")}
+                  <input
+                    className={classes.input}
+                    type="text"
+                    id="FeatureInput"
+                    placeholder="User E-mail"
+                  />
+
+                  {label("User Role:")}
+                  <input
+                    className={classes.input}
+                    type="text"
+                    id="FeatureInput"
+                    placeholder="User Role"
+                  />
+                  <div className={classes.passwordDivGroup}>
+                    <div className={classes.passwordArea}>
+                      {generatedPassword}
+                    </div>
+                    <button onClick={generatePasswordClickHandler}>
+                      {" "}
+                      Generate Password
+                    </button>
+                  </div>
                 </div>
-                <Table
-                  isLoading={loading}
-                  headerData={headerDataPopUp}
-                  rowData={ldapUsers.filter(
-                    (item) =>
-                      item.name
-                        .toLowerCase()
-                        .includes(searchValue.toLowerCase()) ||
-                      item.userid
-                        .toLowerCase()
-                        .includes(searchValue.toLowerCase()) ||
-                      item.title
-                        .toLowerCase()
-                        .includes(searchValue.toLowerCase())
-                  )}
-                  rowLength={rowLengthPopUp}
-                  size={{ height: "50vh", width: "70vw" }}
-                />
               </>
             }
             onConfirm={popUpCloseHandler}

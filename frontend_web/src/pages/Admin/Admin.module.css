@@ -32,3 +32,22 @@
   transition: ease-in-out 75ms;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.label {
+  font-size: 1.5vh;
+  display: flex;
+  align-items: flex-start;
+  color: gray;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: 4.2vh;
+  padding: 0 0.3vw;
+  margin-bottom: 0.4vh;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1.6vh;
+}
