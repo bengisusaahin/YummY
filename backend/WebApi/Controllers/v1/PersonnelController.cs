@@ -66,6 +66,15 @@ namespace WebApi.Controllers.v1
         }
 
         // POST api/<controller>
+        [HttpPost("MyNew")]
+        //        [Authorize]
+        public async Task<IActionResult> MyNew(int myVariable, int secondVariable)
+        {
+            //int result = myVariable +secondVariable;
+            return Ok($"Your variable : {myVariable+secondVariable}");
+        }
+
+        // POST api/<controller>
         [HttpPost("AddCertificateToPersonnel")]
         //        [Authorize]
         public async Task<IActionResult> AddCertificateToPersonnel(AddCertificateToPersonnelCommand command)

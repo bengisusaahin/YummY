@@ -14,5 +14,10 @@ namespace Domain.Entities
         public string PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
+        public decimal Weight { get; set; }
+        public int? Height { get; set; }
+
+
+
     }
 }
