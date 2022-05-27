@@ -1,0 +1,10 @@
+.orders {
+  display: inline-block;
+  padding: 20px;
+  overflow: scroll;
+  width: 100%;
+  white-space: nowrap;
+}
+.ordersOuterDiv {
+  display: inline-block;
+}

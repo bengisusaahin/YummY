@@ -206,6 +206,7 @@ const Admin = () => {
     return <div className={classes.label}>{labelName}</div>;
   };
 
+  const [isGenPasswordClickable, setIsGenPasswordClickabe] = useState(true);
   const generatePasswordClickHandler = () => {
     var chars =
       "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -216,6 +217,7 @@ const Admin = () => {
       password += chars.substring(randomNumber, randomNumber + 1);
     }
     setGeneratedPassword(password);
+    setIsGenPasswordClickabe(false);
   };
 
   return (
@@ -346,9 +348,18 @@ const Admin = () => {
                     <div className={classes.passwordArea}>
                       {generatedPassword}
                     </div>
-                    <button onClick={generatePasswordClickHandler}>
+                    <button
+                      onClick={
+                        isGenPasswordClickable && generatePasswordClickHandler
+                      }
+                    >
                       {" "}
                       Generate Password
+                    </button>
+
+                    <button onClick={() => setIsInfoOpened(false)}>
+                      {" "}
+                      Cancel
                     </button>
                   </div>
                 </div>

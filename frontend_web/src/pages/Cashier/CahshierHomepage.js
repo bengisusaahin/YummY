@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const CahshierHomepage = () => {
-  return (
-    <div>CahshierHomepage</div>
-  );
+  return <div>CahshierHomepage</div>;
 };
 
 export default CahshierHomepage;
