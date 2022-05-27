@@ -1,0 +1,29 @@
+.tablesKnowledge {
+  justify-content: center;
+  background: red;
+  width: 200px;
+}
+.tableKnowledge {
+}
+.tables {
+  margin: auto;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 500px;
+  background-color: red;
+}
+
+.tableItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76px;
+  height: 76px;
+  background-color: blue;
+}
+.tableOuterDiv {
+  display: inline-block;
+  padding: 10px;
+}
