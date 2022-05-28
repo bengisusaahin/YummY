@@ -1,10 +1,32 @@
 .tablesKnowledge {
+  margin: auto;
   justify-content: center;
-  background: red;
-  width: 200px;
+  width: 700px;
+  padding: 10px;
 }
-.tableKnowledge {
+
+.empty {
+  margin: 1px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #0f9d58;
 }
+.nonEmpty {
+  margin: 1px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #babcbe;
+}
+.serve {
+  margin: 1px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #db4437;
+}
+
 .tables {
   margin: auto;
   overflow: auto;
@@ -12,7 +34,6 @@
   align-items: center;
   width: 700px;
   height: 500px;
-  background-color: red;
 }
 
 .tableItem {
@@ -21,7 +42,7 @@
   align-items: center;
   width: 76px;
   height: 76px;
-  background-color: blue;
+  background-color: #babcbe;
 }
 .tableOuterDiv {
   display: inline-block;

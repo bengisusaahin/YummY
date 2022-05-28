@@ -1,8 +1,7 @@
 .button {
   outline: none;
   border-radius: 4px;
-  border: 1px solid #1a73e8;
-  color: #1a73e8;
+  /* border: 1px solid #1a73e8; */
   background-color: white;
   user-select: none;
   text-align: center;
@@ -14,5 +13,5 @@
 .button:hover {
   color: white;
   cursor: pointer;
-  background-color: #1b5fb8;
+  background-color: #db4437;
 }
