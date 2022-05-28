@@ -96,3 +96,15 @@ app.get("/getOrderedTables", async (req, res) => {
     res.status(400);
   }
 });
+
+app.get("/getTables", async (req, res) => {
+  try {
+    const getTables = await pool.query(
+      "SELECT * FROM tables ORDER BY tableid ASC "
+    );
+    res.json(getTables.rows);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400);
+  }
+});
