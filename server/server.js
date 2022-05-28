@@ -70,3 +70,29 @@ app.post("/update_role", async (req, res) => {
     console.error(err.message);
   }
 });
+
+app.get("/getSpecificOrder/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getOrders = await pool.query(
+      "SELECT tableid,ordercontent FROM orders WHERE tableid = $1",
+      [id]
+    );
+    res.json(getOrders.rows);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400);
+  }
+});
+
+app.get("/getOrderedTables", async (req, res) => {
+  try {
+    const getSpecificOrder = await pool.query(
+      "SELECT distinct tableid FROM orders ORDER BY tableid ASC "
+    );
+    res.json(getSpecificOrder.rows);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400);
+  }
+});
