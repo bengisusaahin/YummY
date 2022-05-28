@@ -1,0 +1,86 @@
+.tablesKnowledge {
+  justify-content: center;
+  margin: 20px;
+  margin-left: 80px;
+  width: 700vw;
+}
+.empty {
+  margin: 3px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #0f9d58;
+}
+.e {
+  float: left;
+}
+.nonEmpty {
+  margin: 3px;
+  margin-left: 50px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #babcbe;
+}
+.n {
+  float: left;
+}
+.serve {
+  margin: 3px;
+  margin-left: 50px;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background-color: #db4437;
+}
+.r {
+  float: left;
+}
+.searchContainer {
+  width: 51vw;
+  margin-left: 80px;
+}
+.tables {
+  margin-left: 70px;
+  margin-top: 8px;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 796px;
+  height: 75vh;
+}
+
+.tableItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76px;
+  height: 76px;
+  background-color: #babcbe;
+}
+.tableOuterDiv {
+  display: inline-block;
+  padding: 10px;
+}
+
+.billDiv {
+  display: inline-block;
+  background-color: #f6f6f6;
+  height: 75vh;
+  width: 400px;
+  margin-left: 200px;
+  padding: 15px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.confirmOrder {
+  width: 40%;
+  height: 8%;
+  background-color: #0f9d58;
+  border-radius: 5px;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+}

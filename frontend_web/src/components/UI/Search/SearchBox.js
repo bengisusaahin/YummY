@@ -34,7 +34,6 @@ const SearchBox = forwardRef((props, ref) => {
         borderRadius: props.borderRadius,
       }}
     >
-      <AiOutlineSearch className={classes.searchIcon} />
       <input
         type="text"
         onKeyDown={props.searchClick}
@@ -43,6 +42,7 @@ const SearchBox = forwardRef((props, ref) => {
         ref={searchRef}
         onChange={searchChangeHandler}
       ></input>
+      <AiOutlineSearch className={classes.searchIcon} />
       {!isEmpty && (
         <MdCancel onClick={CancelHandler} className={classes.cancelIcon} />
       )}

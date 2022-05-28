@@ -5,17 +5,17 @@ import AuthContext from "./store/auth-context";
 import Admin from "./pages/Admin/Admin";
 import Waiter from "./pages/Waiter/WaiterHomepage";
 import Chef from "./pages/Chef/ChefHomepage";
-import Cashier from "./pages/Cashier/CahshierHomepage";
+import Cashier from "./pages/Cashier/CashierHomepage";
 import NavBar from "./components/Layout/NavBar";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = true;
 
-  const isAdmin = true;
+  const isAdmin = false;
   const isWaiter = false;
   const isChef = false;
-  const isCashier = false;
+  const isCashier = true;
 
   const navTo = (comp) => {
     return isLoggedIn ? comp : <Navigate to="/login" />;
