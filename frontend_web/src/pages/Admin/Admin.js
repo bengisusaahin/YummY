@@ -33,7 +33,6 @@ const Admin = () => {
   const popUpHandler = (e) => {
     e.preventDefault();
     setIsInfoOpened(true);
-    fetchingPopUp();
   };
   const popUpCloseHandler = useCallback((e) => {
     e.preventDefault();
@@ -64,48 +63,12 @@ const Admin = () => {
       col: rowLength[4],
     },
   ];
-  // const headerDataPopUp = [
-  //   {
-  //     name: "User ID",
-  //     col: rowLength[0],
-  //   },
-  //   {
-  //     name: "Name",
-  //     col: rowLength[1],
-  //   },
-  //   {
-  //     name: "Title",
-  //     col: rowLength[2],
-  //   },
-  // ];
 
   headerData[5] = {
     name: (
       <IconButton iconButton={<AiOutlineUserAdd />} onClick={popUpHandler} />
     ),
     col: rowLength[4],
-  };
-  const fetchingPopUp = async () => {
-    setLoading(true);
-    const response = await fetch("http://localhost:3002/ldap_users");
-    const data = await response.json();
-    const newDatas = [];
-    data.map((data) =>
-      newDatas.push({
-        userid: data.userid,
-        name: data.userName,
-        title: data.user_title,
-
-        button: (
-          <IconButton
-            iconCss={classes.iconCss}
-            iconButton={<AiOutlinePlusCircle />}
-          />
-        ),
-      })
-    );
-    setLdapUsers(newDatas);
-    setLoading(false);
   };
 
   const fetching = async () => {
@@ -130,15 +93,15 @@ const Admin = () => {
     setIsDeletePopUpOpened(false);
     try {
       const deleteUser = await fetch(
-        `http://localhost:3002/userDelete/${data.userid}`,
+        `http://localhost:3002/deleteUser/${data.userid}`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userid: data.userid,
-            userName: data.userName,
-            userRole: data.userRole,
-            manager_name: localStorage.getItem("userName"),
+            username: data.username,
+            userrole: data.userrole,
+            manager_name: localStorage.getItem("username"),
             manager_id: localStorage.getItem("userid"),
           }),
         }
@@ -146,7 +109,7 @@ const Admin = () => {
         if (response.statusText.includes("OK")) {
           setUsers(users.filter((item) => item.userid !== data.userid));
 
-          success("You have successfully deleted user " + data.userName);
+          success("You have successfully deleted user " + data.username);
         } else {
           throw new Error("User not found!");
         }
@@ -167,27 +130,27 @@ const Admin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userid: data.userid,
-          userName: data.userName,
-          userRole: userRoleToBeChanged,
-          user_old_role: data.userRole,
+          username: data.username,
+          userrole: userRoleToBeChanged,
+          user_old_role: data.userrole,
         }),
       });
       setIsRoleChangePopUpOpened(false);
       success(
         "You have successfully changed user " +
           data.userid +
-          "'s userRole to " +
+          "'s userrole to " +
           userRoleToBeChanged
       );
       setUsers([
         ...users.slice(0, users.indexOf(data)),
-        { ...data, userRole: userRoleToBeChanged },
+        { ...data, userrole: userRoleToBeChanged },
         ...users.slice(users.indexOf(data) + 1),
       ]);
     } catch (err) {
       setIsRoleChangePopUpOpened(false);
       error(
-        "An error happened when changing user " + data.userid + "'s userRole"
+        "An error happened when changing user " + data.userid + "'s userrole"
       );
 
       console.log(err.message);
@@ -198,8 +161,8 @@ const Admin = () => {
       userUpdate(data);
     }
   };
-  const changeRoleSelectHandler = (userRole) => {
-    setUserRoleToBeChanged(userRole);
+  const changeRoleSelectHandler = (userrole) => {
+    setUserRoleToBeChanged(userrole);
   };
 
   const label = (labelName) => {
@@ -236,13 +199,13 @@ const Admin = () => {
           .filter(
             (data) =>
               (data.userid + "").includes(searchValue) ||
-              data.userName.toLowerCase().includes(searchValue.toLowerCase())
+              data.username.toLowerCase().includes(searchValue.toLowerCase())
           )
           .map((data) => ({
             userid: data.userid,
-            name: data.userName,
-            email: data.userEmail,
-            userRole: (
+            name: data.username,
+            email: data.useremail,
+            userrole: (
               <Select
                 onClick={(e) => {
                   e.stopPropagation();
@@ -257,7 +220,7 @@ const Admin = () => {
                 dValue={
                   data.userid === userToChangeRole.userid
                     ? userRoleToBeChanged
-                    : data.userRole
+                    : data.userrole
                 }
                 cSelect={classes.select}
               />
@@ -286,7 +249,7 @@ const Admin = () => {
           }}
           text={
             <p>
-              {`Do you approve deleting user ${toBeDeletedItem.userName} with id ${toBeDeletedItem.userid}?`}
+              {`Do you approve deleting user ${toBeDeletedItem.username} with id ${toBeDeletedItem.userid}?`}
             </p>
           }
           confirmationBoxText={"I read and agree the responsible"}
@@ -305,7 +268,7 @@ const Admin = () => {
           }}
           text={
             <p>
-              {`Do you approve changing userRole for user ${userToChangeRole.userName}`}
+              {`Do you approve changing userrole for user ${userToChangeRole.username}`}
               ?
             </p>
           }

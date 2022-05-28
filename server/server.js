@@ -22,7 +22,7 @@ app.get("/getUsers", async (req, res) => {
 app.delete("/deleteUser/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteUser = await pool.query("DELETE FROM users WHERE userID = $1", [
+    const deleteUser = await pool.query("DELETE FROM users WHERE userid = $1", [
       id,
     ]);
     if (deleteUser.rowCount === 0) {
