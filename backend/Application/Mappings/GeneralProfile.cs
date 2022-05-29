@@ -1,47 +1,32 @@
-using Application.Features.Categories.Queries.GetAllCategories;
-using Application.Features.Categories.Commands.CreateCategory;
-using Application.Features.Products.Commands.CreateProduct;
-using Application.Features.Products.Queries.GetAllProducts;
-using Application.Features.Addresses.Commands.CreateAddress;
-using Application.Features.Addresses.Queries.GetAllAddresses;
-using Application.Features.Addresses.Commands.UpdateAddress;
 using AutoMapper;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Application.Features.Certificates.Queries.GetAllCertificates;
-using Application.Features.Certificates.Commands.CreateCertificate;
-using Application.Features.Certificates.Commands.UpdateCertificate;
-using Application.Features.WorkHistories.Commands.CreateWorkHistory;
-using Application.Features.WorkHistories.Queries.GetAllWorkHistories;
-using Application.Features.WorkHistories.Commands.UpdateWorkHistory;
-using Application.Features.Educations.Queries.GetAllEducations;
-using Application.Features.Educations.Commands.CreateEducation;
-using Application.Features.Educations.Queries.GetEducationById;
-using Application.Features.Educations.Commands.UpdateEducation;
 
-//project
-using Application.Features.Products.Commands.CreateProject;
-using Application.Features.Projects.Commands.UpdateProject;
-using Application.Features.Projects.Queries.GetAllProjects;
-using Application.Features.Contacts.Queries.GetAllContacts;
-using Application.Features.Contacts.Commands.CreateContact;
-using Application.Features.Contacts.Commands.UpdateContact;
-using Application.Features.Personnels.Queries.GetAllPersonnels;
-using Application.Features.Personnels.Commands.CreatePersonnel;
-using Application.Features.Personnels.Commands.UpdatePersonnel;
-using Application.Features.Events.Queries.GetAllEvents;
-using Application.Features.Events.Commands.CreateEvent;
-using Application.Features.Events.Commands.UpdateEvent;
-using Application.Features.Inventories.Queries.GetAllInventories;
-using Application.Features.Inventories.Commands.CreateInventory;
-using Application.Features.Inventories.Commands.UpdateInventory;
+//Orders
+using Application.Features.Orders.Queries.GetAllOrders;
+using Application.Features.Orders.Queries.GetOrderById;
+using Application.Features.Orders.Commands.DeleteOrderById;
+using Application.Features.Orders.Commands.CreateOrder;
+using Application.Features.Orders.Commands.UpdateOrder;
 
-//announcement
-using Application.Features.Announcements.Commands.CreateAnnouncement;
-using Application.Features.Announcements.Queries.GetAllAnnouncements;
-using Application.Features.Announcements.Commands.UpdateAnnouncement;
+//Tables
+using Application.Features.Tables.Queries.GetAllTables;
+using Application.Features.Tables.Queries.GetTableById;
+using Application.Features.Tables.Commands.CreateTable;
+using Application.Features.Tables.Commands.DeleteTableById;
+using Application.Features.Tables.Commands.UpdateTable;
+
+//Users
+using Application.Features.Users.Queries.GetAllUsers;
+using Application.Features.Users.Queries.GetUserById;
+using Application.Features.Users.Commands.CreateUser;
+using Application.Features.Users.Commands.DeleteUserById;
+using Application.Features.Users.Commands.UpdateUser;
+
+
+
 
 namespace Application.Mappings
 {
@@ -49,63 +34,27 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            CreateMap<Product, GetAllProductsViewModel>().ReverseMap();
-            CreateMap<CreateProductCommand, Product>();
-            CreateMap<GetAllProductsQuery, GetAllProductsParameter>();
+            CreateMap<CreateUserCommand, User>();
+            CreateMap<User, GetAllUsersViewModel>().ReverseMap();
+            CreateMap<UpdateUserCommand, User>();
+            CreateMap<GetAllUsersQuery, GetAllUsersParameter>();
 
-            CreateMap<Category, GetAllCategoriesViewModel>().ReverseMap();
-            CreateMap<CreateCategoryCommand, Category>();
-            CreateMap<GetAllCategoriesQuery, GetAllCategoriesParameter>();
 
-            CreateMap<Address, GetAllAddressesViewModel>().ReverseMap();
-            CreateMap<CreateAddressCommand, Address>();
-            CreateMap<UpdateAddressCommand, Address>();
-            CreateMap<GetAllAddressesQuery, GetAllAddressesParameter>();
+            CreateMap<Order, GetAllOrdersViewModel>().ReverseMap();
+            CreateMap<CreateOrderCommand, Order>();
+            CreateMap<UpdateOrderCommand, Order>();
+            CreateMap<GetAllOrdersQuery, GetAllOrdersParameter>();
 
-            CreateMap<Certificate, GetAllCertificatesViewModel>().ReverseMap();
-            CreateMap<CreateCertificateCommand, Certificate>();
-            CreateMap<UpdateCertificateCommand, Certificate>();
-            CreateMap<GetAllCertificatesQuery, GetAllCertificatesParameter>();
 
-            CreateMap<WorkHistory, GetAllWorkHistoriesViewModel>().ReverseMap();
-            CreateMap<CreateWorkHistoryCommand, WorkHistory>();
-            CreateMap<UpdateWorkHistoryCommand, WorkHistory>();
-            CreateMap<GetAllWorkHistoriesQuery, GetAllWorkHistoriesParameter>();
+            CreateMap<Table, GetAllTablesViewModel>().ReverseMap();
+            CreateMap<CreateTableCommand, Table>();
+            CreateMap<UpdateTableCommand, Table>();
+            CreateMap<GetAllTablesQuery, GetAllTablesParameter>();
 
-            CreateMap<Project, GetAllProjectsViewModel>().ReverseMap();
-            CreateMap<CreateProjectCommand, Project>();
-            CreateMap<UpdateProjectCommand, Project>();
-            CreateMap<GetAllProjectsQuery, GetAllProjectsParameter>();
 
-            CreateMap<CreateAnnouncementCommand, Announcement>();
-            CreateMap<Announcement, GetAllAnnouncementsViewModel>().ReverseMap();
-            CreateMap<UpdateAnnouncementCommand, Announcement>();
-            CreateMap<GetAllAnnouncementsQuery, GetAllAnnouncementsParameter>();
 
-            CreateMap<Education, GetAllEducationsViewModel>().ReverseMap();
-            CreateMap<CreateEducationCommand, Education>();
-            CreateMap<UpdateEducationCommand, Education>();
-            CreateMap<GetAllEducationsQuery, GetAllEventsParameter>();
 
-            CreateMap<Event, GetAllEventsViewModel>().ReverseMap();
-            CreateMap<CreateEventCommand, Event>();
-            CreateMap<UpdateEventCommand, Event>();
-            CreateMap<GetAllEventsQuery, GetAllEventsParameter>();
 
-            CreateMap<Personnel, GetAllPersonnelsViewModel>().ReverseMap();
-            CreateMap<CreatePersonnelCommand, Personnel>();
-            CreateMap<UpdatePersonnelCommand, Personnel>();
-            CreateMap<GetAllPersonnelsQuery, GetAllPersonnelsParameter>();
-
-            CreateMap<Inventory, GetAllInventoriesViewModel>().ReverseMap();
-            CreateMap<CreateInventoryCommand, Inventory>();
-            CreateMap<UpdateInventoryCommand, Inventory>();
-            CreateMap<GetAllInventoriesQuery, GetAllInventoriesParameter>();
-
-            CreateMap<Contact, GetAllContactsViewModel>().ReverseMap();
-            CreateMap<CreateContactCommand, Contact>();
-            CreateMap<UpdateContactCommand, Contact>();
-            CreateMap<GetAllContactsQuery, GetAllContactsParameter>();
 
         }
     }

@@ -20,17 +20,17 @@ namespace WebApi.Controllers.v1
     {
         // GET: api/<controller>
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllAddressesParameter filter)
+        public async Task<IActionResult> Get([FromQuery] GetAllUsersParameter filter)
         {
 
-            return Ok(await Mediator.Send(new GetAllAddressesQuery() { PageSize = filter.PageSize, PageNumber = filter.PageNumber }));
+            return Ok(await Mediator.Send(new GetAllUsersQuery() { PageSize = filter.PageSize, PageNumber = filter.PageNumber }));
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await Mediator.Send(new GetAddressByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetUserByIdQuery { Id = id }));
         }
 
         // POST api/<controller>
@@ -44,7 +44,7 @@ namespace WebApi.Controllers.v1
         // PUT api/<controller>/5
         [HttpPut("{id}")]
         //[Authorize]
-        public async Task<IActionResult> Put(int id, UpdateAddressCommand command)
+        public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
             if (id != command.Id)
             {
@@ -58,7 +58,7 @@ namespace WebApi.Controllers.v1
  //       [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeleteAddressByIdCommand { Id = id }));
+            return Ok(await Mediator.Send(new DeleteUseryIdCommand { Id = id }));
         }
     }
 }

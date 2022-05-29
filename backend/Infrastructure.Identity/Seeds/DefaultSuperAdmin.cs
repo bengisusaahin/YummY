@@ -18,10 +18,10 @@ namespace Infrastructure.Identity.Seeds
             //Seed Default User
             var defaultUser = new ApplicationUser
             {
-                UserName = "superadmin",
-                Email = "superadmin@gmail.com",
-                FirstName = "Mukesh",
-                LastName = "Murugan",
+                UserName = "aybars",
+                Email = "aybars@ay.com",
+                FirstName = "Aybars",
+                LastName = "Duran",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
@@ -30,11 +30,14 @@ namespace Infrastructure.Identity.Seeds
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "123Pa$$word!");
+                    await userManager.CreateAsync(defaultUser, "aybars123");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Basic.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.Moderator.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.SuperAdmin.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Waiter.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Chef.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Cashier.ToString());
                 }
 
             }

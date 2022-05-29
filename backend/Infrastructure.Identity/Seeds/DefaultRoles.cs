@@ -17,6 +17,10 @@ namespace Infrastructure.Identity.Seeds
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Roles.Moderator.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Roles.Basic.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(Roles.Chef.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(Roles.Cashier.ToString()));
+            await roleManager.CreateAsync(new IdentityRole(Roles.Waiter.ToString()));
+
         }
     }
 }

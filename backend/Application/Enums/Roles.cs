@@ -9,6 +9,10 @@ namespace Application.Enums
         SuperAdmin,
         Admin,
         Moderator,
-        Basic
+        Basic,
+        Waiter,
+        Chef,
+        Cashier
+
     }
 }

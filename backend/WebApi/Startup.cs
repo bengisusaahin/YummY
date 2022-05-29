@@ -2,12 +2,16 @@ using Application;
 using Application.Interfaces;
 using Infrastructure.Identity;
 using Infrastructure.Persistence;
+using Infrastructure.Persistence.Contexts;
 using Infrastructure.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Configuration;
 using WebApi.Extensions;
 using WebApi.Services;
 
@@ -45,6 +49,13 @@ namespace WebApi
             services.AddApiVersioningExtension();
             services.AddHealthChecks();
             services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
+
+            services.AddMvc();
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opt =>
+            opt.UseNpgsql(_config.GetConnectionString("DefaultConnection")));
+            
+
+
 
         }
 
