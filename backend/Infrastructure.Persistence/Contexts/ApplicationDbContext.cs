@@ -56,6 +56,8 @@ namespace Infrastructure.Persistence.Contexts
                 property.SetColumnType("decimal(18,6)");
             }
             base.OnModelCreating(builder);
+
+            
         }
     }
 }

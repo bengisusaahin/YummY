@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Features.Addresses.Commands.CreateAddress;
-using Application.Features.Addresses.Commands.DeleteAddressById;
-using Application.Features.Addresses.Commands.UpdateAddress;
-using Application.Features.Addresses.Queries.GetAllAddresses;
-using Application.Features.Addresses.Queries.GetAddressById;
+using Application.Features.Users.Commands.CreateUser;
+using Application.Features.Users.Commands.DeleteUserById;
+using Application.Features.Users.Commands.UpdateUser;
+using Application.Features.Users.Queries.GetAllUsers;
+using Application.Features.Users.Queries.GetUserById;
 using Application.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
-    public class AddressController : BaseApiController
+    public class UserController : BaseApiController
     {
         // GET: api/<controller>
         [HttpGet]
@@ -27,26 +27,26 @@ namespace WebApi.Controllers.v1
         }
 
         // GET api/<controller>/5
-        [HttpGet("{id}")]
+        [HttpGet("{UserId}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await Mediator.Send(new GetUserByIdQuery { Id = id }));
         }
 
-        // POST api/<controller>
-        [HttpPost]
+        // POST api/<controller>/CreateUser
+        [HttpPost("CreateUser")]
         //        [Authorize]
-        public async Task<IActionResult> Post(CreateAddressCommand command)
+        public async Task<IActionResult> Post(CreateUserCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         // PUT api/<controller>/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateUser")]
         //[Authorize]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
-            if (id != command.Id)
+            if (id != command.UserId)
             {
                 return BadRequest();
             }
@@ -54,11 +54,11 @@ namespace WebApi.Controllers.v1
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
- //       [Authorize]
+        [HttpDelete("{UserId}Delete")]
+        //       [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeleteUseryIdCommand { Id = id }));
+            return Ok(await Mediator.Send(new DeleteUserByIdCommand { Id = id }));
         }
     }
 }

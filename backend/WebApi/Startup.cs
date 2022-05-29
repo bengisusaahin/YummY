@@ -31,7 +31,7 @@ namespace WebApi
             services.AddPersistenceInfrastructure(_config);
             services.AddSharedInfrastructure(_config);
             services.AddCors(options =>
-            {
+             {
             options.AddDefaultPolicy(
                 builder =>
                 {

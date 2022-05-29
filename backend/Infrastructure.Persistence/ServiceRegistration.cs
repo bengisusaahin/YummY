@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Infrastructure.Persistence
 {
     public static class ServiceRegistration
@@ -23,10 +24,12 @@ namespace Infrastructure.Persistence
             }
             else
             {
-               // services.AddDbContext<ApplicationDbContext>(options =>
-               //options.UseSqlServer(
-               //    configuration.GetConnectionString("DefaultConnection"),
-               //    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                // services.AddDbContext<ApplicationDbContext>(options =>
+                //options.UseSqlServer(
+                //    configuration.GetConnectionString("DefaultConnection"),
+                //    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+              
 
                 services.AddDbContext<ApplicationDbContext>(options =>
                options.UseNpgsql(
@@ -35,19 +38,10 @@ namespace Infrastructure.Persistence
             }
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
-            services.AddTransient<IProductRepositoryAsync, ProductRepositoryAsync>();
-            services.AddTransient<ICategoryRepositoryAsync, CategoryRepositoryAsync>();
-            services.AddTransient<IAddressRepositoryAsync, AddressRepositoryAsync>();
-            services.AddTransient<ICertificateRepositoryAsync, CertificateRepositoryAsync>();
-            services.AddTransient<IWorkHistoryRepositoryAsync, WorkHistoryRepositoryAsync>();
-            services.AddTransient<IEducationRepositoryAsync, EducationRepositoryAsync>();
-
-            services.AddTransient<IContactRepositoryAsync, ContactRepositoryAsync>();
-            services.AddTransient<IProjectRepositoryAsync, ProjectRepositoryAsync>();
-            services.AddTransient<IAnnouncementRepositoryAsync, AnnouncementRepositoryAsync>();
-            services.AddTransient<IPersonnelRepositoryAsync, PersonnelRepositoryAsync>();
-            services.AddTransient<IInventoryRepositoryAsync, InventoryRepositoryAsync>();
-            services.AddTransient<IEventRepositoryAsync, EventRepositoryAsync>();
+            services.AddTransient<ITableRepositoryAsync, TableRepositoryAsync>();
+            services.AddTransient<IUserRepositoryAsync, UserRepositoryAsync>();
+            services.AddTransient<IOrderRepositoryAsync, OrderRepositoryAsync>();
+            
 
             #endregion
         }

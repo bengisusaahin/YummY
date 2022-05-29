@@ -8,7 +8,7 @@ namespace Application.Interfaces.Repositories
 {
     public interface ITableRepositoryAsync : IGenericRepositoryAsync<Table>
     {
-        public Task<IReadOnlyList<Table>> GetUserWithRelationsAsync(int pageNumber, int pageSize);
-        public Task<Table> GetUserByIdWithRelationsAsync(int TableId);
+      
+        
     }
 }

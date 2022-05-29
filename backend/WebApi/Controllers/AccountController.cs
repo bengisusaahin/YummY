@@ -54,5 +54,7 @@ namespace WebApi.Controllers
             else
                 return HttpContext.Connection.RemoteIpAddress==null ? "127.0.0.1":HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
         }
+
+        
     }
 }
