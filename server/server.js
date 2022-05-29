@@ -108,3 +108,18 @@ app.get("/getTables", async (req, res) => {
     res.status(400);
   }
 });
+
+app.post("/saveOrder", async (req, res) => {
+  try {
+    const { tableid, ordercontent, orderstate, price, amount } = req.body;
+    const saveOrder = await pool.query(
+      "INSERT INTO orders VALUES ($1, $2, $3, $4, $5)",
+      [tableid, ordercontent, orderstate, price, amount]
+    );
+
+    res.status(200).send();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send();
+  }
+});
