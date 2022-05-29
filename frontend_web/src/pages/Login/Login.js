@@ -65,10 +65,10 @@ const Login = (props) => {
     <div className={classes.body}>
       <section className={classes.auth}>
         <img
-          src="https://tirsan.imgix.net/media/images/toDelete/logo.png"
-          width="100%"
+          src="https://media.istockphoto.com/vectors/yummy-smile-emoticon-with-tongue-lick-mouth-tasty-food-eating-emoji-vector-id1152863150"
+          width="40%"
         />
-        <h1>{"Tırsan Logistic Library"}</h1>
+        <h1>{"YummY"}</h1>
         <form onSubmit={submitHandler}>
           <Input
             type="text"

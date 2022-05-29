@@ -1,8 +1,7 @@
 .tablesKnowledge {
+  display: inline-block;
   justify-content: center;
   margin: 20px;
-  margin-left: 80px;
-  width: 700vw;
 }
 .empty {
   margin: 3px;
@@ -37,12 +36,9 @@
   float: left;
 }
 .searchContainer {
-  width: 51vw;
-  margin-left: 80px;
+  width: 100%;
 }
 .tables {
-  margin-left: 70px;
-  margin-top: 8px;
   overflow: auto;
   justify-content: center;
   align-items: center;
@@ -64,23 +60,31 @@
   padding: 10px;
 }
 
-.billDiv {
-  display: inline-block;
+.rightDiv {
   background-color: #f6f6f6;
-  height: 75vh;
+  height: auto;
   width: 400px;
-  margin-left: 200px;
   padding: 15px;
   border-radius: 5px;
   position: relative;
+  margin-left: 50px;
 }
 
 .confirmOrder {
-  width: 40%;
+  width: 92%;
   height: 8%;
   background-color: #0f9d58;
   border-radius: 5px;
   color: white;
   position: absolute;
   bottom: 0px;
+}
+
+.leftDiv {
+  margin-left: 10vw;
+  float: left;
+}
+
+.mainDiv {
+  display: flex;
 }

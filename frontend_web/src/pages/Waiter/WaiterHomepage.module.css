@@ -47,3 +47,47 @@
   display: inline-block;
   padding: 10px;
 }
+
+.menuItem {
+  display: flex;
+  padding: 15px;
+  position: relative;
+  border: 1px solid black;
+}
+.menuItem + .menuItem {
+  margin-top: 10px;
+}
+.menuItem p {
+  margin: auto 0 auto 10px;
+}
+
+.decreaseAmountButton {
+  margin-left: 10px;
+}
+.increaseAmountButton {
+  margin-left: 10px;
+}
+.productAmount {
+  margin-left: 10px;
+}
+.price {
+  margin-left: 10px;
+}
+.orderDetails {
+  display: flex;
+  position: absolute;
+  margin-top: 12px;
+  right: 20px;
+}
+.popUpContent {
+  height: 50vh;
+  overflow: auto;
+}
+
+.orderSaveButton {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #0f9d58;
+  border-radius: 5px;
+  color: white;
+}

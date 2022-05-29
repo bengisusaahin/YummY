@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classes from "./WaiterHomepage.module.css";
 import Popup from "../../components/UI/PopUp/Popup";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlineMinusCircle } from "react-icons/ai";
 
 const WaiterHomepage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -78,19 +80,257 @@ const WaiterHomepage = () => {
         })}
       </div>
       <div>
-        {isMenuOpened &&
-          (console.log("jhaslkdjhaskjdh"),
-          (
-            <Popup
-              title="Add User"
-              message={
-                <>
-                  <p>denemeeee</p>
-                </>
-              }
-              onConfirm={popUpCloseHandler}
-            ></Popup>
-          ))}
+        {isMenuOpened && (
+          <Popup
+            title="Add Order"
+            message={
+              <>
+                <div className={classes.popUpContent}>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                  <div className={classes.menuItem}>
+                    <img
+                      src="https://images.deliveryhero.io/image/fd-tr/LH/e939-hero.jpg"
+                      width="10%"
+                    />
+                    <p>Pizza</p>
+                    <div className={classes.orderDetails}>
+                      <div className={classes.price}>50TL</div>
+                      <div className={classes.decreaseAmountButton}>
+                        <AiOutlineMinusCircle />
+                      </div>
+                      <div className={classes.productAmount}>1</div>
+                      <div className={classes.increaseAmountButton}>
+                        <AiOutlinePlusCircle />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button className={classes.orderSaveButton}> SAVE </button>
+              </>
+            }
+            onConfirm={popUpCloseHandler}
+          ></Popup>
+        )}
       </div>
     </>
   );

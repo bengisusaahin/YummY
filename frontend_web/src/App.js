@@ -13,9 +13,9 @@ const App = () => {
   const isLoggedIn = true;
 
   const isAdmin = false;
-  const isWaiter = false;
+  const isWaiter = true;
   const isChef = false;
-  const isCashier = true;
+  const isCashier = false;
 
   const navTo = (comp) => {
     return isLoggedIn ? comp : <Navigate to="/login" />;

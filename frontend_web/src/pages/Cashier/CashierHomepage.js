@@ -67,51 +67,55 @@ const CashierHomepage = (props) => {
   };
   return (
     <>
-      <div className={classes.tablesKnowledge}>
-        <div className={classes.empty}></div>
-        <div className={classes.e}>Empty Tables</div>
-        <div className={classes.nonEmpty}></div>
-        <div className={classes.n}>Non-Empty Tables</div>
-        <div className={classes.serve}></div>
-        <div className={classes.r}>Ready to Serve Tables</div>
-      </div>
-      <div className={classes.searchContainer}>
-        <SearchBox search="Search Table" />
-      </div>
-      <div className={classes.tables}>
-        {tables.map((item) => {
-          return (
-            <div className={classes.tableOuterDiv}>
-              <div
-                className={classes.tableItem}
-                style={{ backgroundColor: getTableColor(item.tablestate) }}
-                onClick={() => {
-                  if (isMenuOpenable(item.tablestate)) {
-                    //isOrderOpenable olcak
-                    setIsMenuOpened(true);
-                  }
-                }}
-              >
-                {item.tableid}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <div className={classes.mainDiv}>
+        <div className={classes.leftDiv}>
+          <div className={classes.tablesKnowledge}>
+            <div className={classes.empty}></div>
+            <div className={classes.e}>Empty Tables</div>
+            <div className={classes.nonEmpty}></div>
+            <div className={classes.n}>Non-Empty Tables</div>
+            <div className={classes.serve}></div>
+            <div className={classes.r}>Ready to Serve Tables</div>
+          </div>
+          <div className={classes.searchContainer}>
+            <SearchBox search="Search Table" />
+          </div>
+          <div className={classes.tables}>
+            {tables.map((item) => {
+              return (
+                <div className={classes.tableOuterDiv}>
+                  <div
+                    className={classes.tableItem}
+                    style={{ backgroundColor: getTableColor(item.tablestate) }}
+                    onClick={() => {
+                      if (isMenuOpenable(item.tablestate)) {
+                        //isOrderOpenable olcak
+                        setIsMenuOpened(true);
+                      }
+                    }}
+                  >
+                    {item.tableid}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-      <div className={classes.billDiv}>
-        <h2>
-          Selected Table {props.tableid} <hr></hr>{" "}
-        </h2>
-        {orderData.map((item) => {
-          return (
-            <div>
-              {item.ordercontent}
-              <hr />
-            </div>
-          );
-        })}
-        <button className={classes.confirmOrder}> Confirm Order</button>
+        <div className={classes.rightDiv}>
+          <h2>
+            Selected Table {props.tableid} <hr></hr>{" "}
+          </h2>
+          {orderData.map((item) => {
+            return (
+              <div>
+                {item.ordercontent}
+                <hr />
+              </div>
+            );
+          })}
+          <button className={classes.confirmOrder}> Confirm Order</button>
+        </div>
       </div>
     </>
   );
