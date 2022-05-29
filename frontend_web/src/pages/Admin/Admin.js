@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Table from "../../components/UI/Table/Table";
 import classes from "./Admin.module.css";
 import Select from "../../components/UI/Inputs/Select";
@@ -6,10 +6,11 @@ import SearchBox from "../../components/UI/Search/SearchBox";
 import Popup from "../../components/UI/PopUp/Popup";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import IconButton from "../../components/UI/IconButton/IconButton";
 import Toast, { success, error } from "../../components/UI/Toast/Toaster";
 import ConfirmationPopUp from "../../components/UI/PopUp/ConfirmationPopUp";
+import Button from "../../components/UI/Button/Button";
+
 const Admin = () => {
   const roles = ["Admin", "Waiter", "Cashier", "Chef"];
   const rowLength = [1, 2, 3, 2, 3, 1];
@@ -24,8 +25,11 @@ const Admin = () => {
   const [isRoleChangePopUpOpened, setIsRoleChangePopUpOpened] = useState(false);
   const [userToChangeRole, setUserToChangeRole] = useState({});
   const [userRoleToBeChanged, setUserRoleToBeChanged] = useState(null);
-
   const [generatedPassword, setGeneratedPassword] = useState("");
+  const [isUserAddedPopUpOpened, setIsUserAddedPopUpOpened] = useState(false);
+  const usernameRef = useRef();
+  const useremailRef = useRef();
+  const userroleRef = useRef();
 
   const onSearchValueChanged = (value) => {
     setSearchValue(value);
@@ -182,6 +186,27 @@ const Admin = () => {
     setGeneratedPassword(password);
     setIsGenPasswordClickabe(false);
   };
+  const addUser = async () => {
+    try {
+      await fetch("http://localhost:3002/addUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: usernameRef.current.value,
+          email: useremailRef.current.value,
+          userrole: userroleRef.current.value,
+          encryptedPassword: "asd",
+        }),
+      });
+      setIsUserAddedPopUpOpened(false);
+      success("You have successfully added user ");
+    } catch (err) {
+      setIsUserAddedPopUpOpened(false);
+      error("An error happened when adding user ");
+
+      console.log(err.message);
+    }
+  };
 
   return (
     <div className={classes.container}>
@@ -290,6 +315,7 @@ const Admin = () => {
                     type="text"
                     id="FeatureInput"
                     placeholder="User Name"
+                    ref={usernameRef}
                   />
 
                   {label("User E-mail:")}
@@ -298,6 +324,7 @@ const Admin = () => {
                     type="text"
                     id="FeatureInput"
                     placeholder="User E-mail"
+                    ref={useremailRef}
                   />
 
                   {label("User Role:")}
@@ -306,25 +333,36 @@ const Admin = () => {
                     type="text"
                     id="FeatureInput"
                     placeholder="User Role"
+                    ref={userroleRef}
                   />
                   <div className={classes.passwordDivGroup}>
                     <div className={classes.passwordArea}>
                       {generatedPassword}
                     </div>
-                    <button
-                      onClick={
-                        isGenPasswordClickable && generatePasswordClickHandler
-                      }
-                    >
-                      {" "}
-                      Generate Password
-                    </button>
-
-                    <button onClick={() => setIsInfoOpened(false)}>
-                      {" "}
-                      Cancel
-                    </button>
                   </div>
+                  <Button
+                    buttonName="Generate Password"
+                    width={"10vw"}
+                    height={"2vw"}
+                    buttonCss={classes.passwordButtonCss}
+                    onClick={
+                      isGenPasswordClickable && generatePasswordClickHandler
+                    }
+                  />
+                  <Button
+                    buttonName="Save"
+                    width={"5vw"}
+                    height={"2vw"}
+                    buttonCss={classes.saveButtonCss}
+                    onClick={!isGenPasswordClickable && addUser}
+                  />
+                  <Button
+                    buttonName="Cancel"
+                    width={"5vw"}
+                    height={"2vw"}
+                    buttonCss={classes.cancelButtonCss}
+                    onClick={() => setIsInfoOpened(false)}
+                  />
                 </div>
               </>
             }

@@ -23,7 +23,11 @@ const NavBar = () => {
       </div>
       <div className={classes.signoutbar}>
         <div className={classes.signout}>
-          <Button onClick={signoutHandler} buttonName="Sign Out" />
+          <Button
+            onClick={signoutHandler}
+            buttonName="Sign Out"
+            buttonCss={classes.signoutButtonCss}
+          />
           <IoIosLogOut
             onClick={signoutHandler}
             style={{

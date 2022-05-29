@@ -51,3 +51,37 @@
   outline: none;
   font-size: 1.6vh;
 }
+.passwordButtonCss {
+  margin-top: 10px;
+  background-color: white !important;
+  color: #db4437 !important;
+  border: 1px solid #db4437 !important;
+}
+.passwordButtonCss:hover {
+  background-color: #db4437 !important;
+  color: white !important;
+  cursor: pointer;
+}
+.saveButtonCss {
+  margin-top: 6px;
+  background-color: white !important;
+  color: #0f9d58 !important;
+  border: 1px solid #0f9d58 !important;
+  float: left;
+}
+.saveButtonCss:hover {
+  background-color: #0f9d58 !important;
+  color: white !important;
+  cursor: pointer;
+}
+.cancelButtonCss {
+  margin-top: 6px;
+  background-color: white !important;
+  color: #666666 !important;
+  border: 1px solid #575757 !important;
+}
+.cancelButtonCss:hover {
+  background-color: #575757 !important;
+  color: white !important;
+  cursor: pointer;
+}

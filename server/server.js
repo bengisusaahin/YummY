@@ -37,10 +37,12 @@ app.delete("/deleteUser/:id", async (req, res) => {
 
 app.post("/addUser", async (req, res) => {
   try {
+    const { username, email, userrole, encryptedPassword } = req.body;
     const addUser = await pool.query(
-      `INSERT INTO users
-       VALUES(default, '${req.body.username}','${req.body.userrole}','${req.body.encrypedPassword})`
+      "INSERT INTO users VALUES (default,$1, $2, $3, $4)",
+      [username, email, userrole, encryptedPassword]
     );
+
     if (addUser.rowCount === 0) {
       res.sendStatus(404);
     } else {
