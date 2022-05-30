@@ -35,24 +35,6 @@ app.delete("/deleteUser/:id", async (req, res) => {
   }
 });
 
-app.post("/addUser", async (req, res) => {
-  try {
-    const { username, email, userrole, encryptedPassword } = req.body;
-    const addUser = await pool.query(
-      "INSERT INTO users VALUES (default,$1, $2, $3, $4)",
-      [username, email, userrole, encryptedPassword]
-    );
-
-    if (addUser.rowCount === 0) {
-      res.sendStatus(404);
-    } else {
-      res.sendStatus(200);
-    }
-  } catch (err) {
-    console.log(err.message);
-  }
-});
-
 app.listen(3002, () => {
   console.log("Server has started on port 3002");
 });
@@ -77,7 +59,7 @@ app.get("/getSpecificOrder/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const getOrders = await pool.query(
-      "SELECT tableid,ordercontent FROM orders WHERE tableid = $1",
+      "SELECT * FROM orders WHERE tableid = $1",
       [id]
     );
     res.json(getOrders.rows);
@@ -118,7 +100,43 @@ app.post("/saveOrder", async (req, res) => {
       "INSERT INTO orders VALUES ($1, $2, $3, $4, $5)",
       [tableid, ordercontent, orderstate, price, amount]
     );
+    const setTableState = await pool.query(
+      "UPDATE tables SET tablestate= 'Full' where tableid = $1",
+      [tableid]
+    );
 
+    res.status(200).send();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send();
+  }
+});
+app.post("/tableOrderReady", async (req, res) => {
+  const { tableid } = req.body;
+  try {
+    const changeTableState = await pool.query(
+      "UPDATE tables SET tablestate='Ready to serve' where tableid = $1",
+      [tableid]
+    );
+
+    const deleteOrder = await pool.query(
+      "DELETE FROM orders where tableid = $1",
+      [tableid]
+    );
+    res.status(200).send();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send();
+  }
+});
+
+app.post("/setTableStateAsFull", async (req, res) => {
+  const { tableid } = req.body;
+  try {
+    const changeTableState = await pool.query(
+      "UPDATE tables SET tablestate='Full' where tableid = $1",
+      [tableid]
+    );
     res.status(200).send();
   } catch (err) {
     console.error(err.message);
