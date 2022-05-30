@@ -13,8 +13,8 @@ const App = () => {
   const isLoggedIn = true;
 
   const isAdmin = false;
-  const isWaiter = true;
-  const isChef = false;
+  const isWaiter = false;
+  const isChef = true;
   const isCashier = false;
 
   const navTo = (comp) => {

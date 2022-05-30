@@ -1,7 +1,7 @@
 .billDiv {
   display: inline-block;
   background-color: #f6f6f6;
-  height: 85vh;
+  height: 77vh;
   width: 300px;
   margin-left: 20px;
   padding: 15px;
@@ -15,4 +15,13 @@
   color: white;
   position: absolute;
   bottom: 0px;
+}
+.orderDetails {
+  display: flex;
+  position: relative;
+}
+
+.orderAmount {
+  position: absolute;
+  right: 5px;
 }

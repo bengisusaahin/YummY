@@ -8,3 +8,6 @@
 .ordersOuterDiv {
   display: inline-block;
 }
+.inQueueText {
+  margin-top: 25px;
+}

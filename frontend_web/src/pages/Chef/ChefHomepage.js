@@ -18,15 +18,22 @@ const ChefHomepage = () => {
   };
 
   return (
-    <div className={classes.orders}>
-      {orders.map((order) => {
-        return (
-          <div className={classes.ordersOuterDiv}>
-            <OrderContent tableid={order.tableid} />
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className={classes.inQueueText}>
+        <h2>In queue orders: </h2>
+      </div>
+      {orders.length === 0 && <p>There are no orders in queue!</p>}
+
+      <div className={classes.orders}>
+        {orders.map((order) => {
+          return (
+            <div className={classes.ordersOuterDiv}>
+              <OrderContent tableid={order.tableid} />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

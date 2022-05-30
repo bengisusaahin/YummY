@@ -11,10 +11,6 @@ const WaiterHomepage = () => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [clickedTable, setClickedTable] = useState();
 
-  useEffect(() => {
-    getTables();
-  }, []);
-
   const getTables = async () => {
     setIsLoading(true);
     try {
@@ -27,21 +23,28 @@ const WaiterHomepage = () => {
       console.log(err.message);
     }
   };
+  useEffect(() => {
+    getTables();
+    const interval = setInterval(() => {
+      getTables();
+    }, 20000);
+    return () => clearInterval(interval);
+  }, []);
 
   const isMenuOpenable = (tableState) => {
-    if (tableState === "empty") {
+    if (tableState === "Empty") {
       return true;
     }
     return false;
   };
   const getTableColor = (tableState) => {
-    if (tableState === "empty") {
+    if (tableState === "Empty") {
       return "#0f9d58";
     }
-    if (tableState === "full") {
+    if (tableState === "Full") {
       return "#babcbe";
     }
-    if (tableState === "ready to serve") {
+    if (tableState === "Ready to serve") {
       return "#db4437";
     }
   };
@@ -91,19 +94,65 @@ const WaiterHomepage = () => {
   const [products, setProducts] = useState(dummyProducts);
 
   const saveOrder = async (product, tableid) => {
-    await fetch("http://localhost:3002/saveOrder", {
-      method: "POST",
-      body: JSON.stringify({
-        tableid: tableid,
-        ordercontent: product.name,
-        orderstate: "In Query",
-        price: product.amount * product.singlePrice,
-        amount: product.amount,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      await fetch("http://localhost:3002/saveOrder", {
+        method: "POST",
+        body: JSON.stringify({
+          tableid: tableid,
+          ordercontent: product.name,
+          orderstate: "In Query",
+          price: product.amount * product.singlePrice,
+          amount: product.amount,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          success("You have successfully save order for table " + tableid);
+          getTables();
+          setIsMenuOpened(false);
+        } else {
+          throw new Error("Table not found!");
+        }
+      });
+    } catch (err) {
+      error(
+        "An error happened when saving the order for table " +
+          tableid +
+          ".\nError Details: " +
+          err.message
+      );
+    }
+  };
+
+  const setTableStateAsFull = async (tableid) => {
+    try {
+      await fetch("http://localhost:3002/setTableStateAsFull", {
+        method: "POST",
+        body: JSON.stringify({
+          tableid: tableid,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          success("You served to table " + tableid);
+          getTables();
+          setIsMenuOpened(false);
+        } else {
+          throw new Error("Table not found!");
+        }
+      });
+    } catch (err) {
+      error(
+        "An error happened when serving the order to table " +
+          tableid +
+          ".\nError Details: " +
+          err.message
+      );
+    }
   };
 
   return (
@@ -120,7 +169,7 @@ const WaiterHomepage = () => {
       </div>
       <br />
       <div className={classes.tables}>
-        {tables.map((item) => {
+        {tables.map((item, index) => {
           return (
             <div className={classes.tableOuterDiv}>
               <div
@@ -130,6 +179,8 @@ const WaiterHomepage = () => {
                   setClickedTable(item.tableid);
                   if (isMenuOpenable(item.tablestate)) {
                     setIsMenuOpened(true);
+                  } else if (item.tablestate === "Ready to serve") {
+                    setTableStateAsFull(item.tableid);
                   }
                 }}
               >
@@ -194,9 +245,6 @@ const WaiterHomepage = () => {
                     {
                       products.map((product, index) => {
                         if (product.amount > 0) {
-                          {
-                            console.log("kaydedildi");
-                          }
                           saveOrder(product, clickedTable);
                         }
                       });
