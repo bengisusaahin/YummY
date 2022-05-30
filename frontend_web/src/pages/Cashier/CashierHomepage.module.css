@@ -88,3 +88,12 @@
 .mainDiv {
   display: flex;
 }
+.orderDetails {
+  display: flex;
+  position: relative;
+}
+
+.orderAmount {
+  position: absolute;
+  right: 5px;
+}
