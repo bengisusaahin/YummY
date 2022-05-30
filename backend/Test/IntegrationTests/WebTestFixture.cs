@@ -42,36 +42,14 @@ namespace IntegrationTests
                         await Infrastructure.Identity.Seeds.DefaultSuperAdmin.SeedAsync(userManager, roleManager);
                         await Infrastructure.Identity.Seeds.DefaultBasicUser.SeedAsync(userManager, roleManager);
 
-                        var categoryRepository = services2.GetRequiredService<ICategoryRepositoryAsync>();
-                        var productRepository = services2.GetRequiredService<IProductRepositoryAsync>();
-                        var addressRepository = services2.GetRequiredService<IAddressRepositoryAsync>();
-                        var certificateRepository = services2.GetRequiredService<ICertificateRepositoryAsync>();
-                        var projectRepository = services2.GetRequiredService<IProjectRepositoryAsync>();
-                        var workHistoryRepository = services2.GetRequiredService<IWorkHistoryRepositoryAsync>();
-                        var announcementRepository = services2.GetRequiredService<IAnnouncementRepositoryAsync>();
-                        var educationRepository = services2.GetRequiredService<IEducationRepositoryAsync>();
-                        var contactRepository = services2.GetRequiredService<IContactRepositoryAsync>();
+                        var userRepository = services2.GetRequiredService<IUserRepositoryAsync>();
+                        var orderRepository = services2.GetRequiredService<IOrderRepositoryAsync>();
+                        var tableRepository = services2.GetRequiredService<ITableRepositoryAsync>();
+                      
 
 
-                        var personnelRepository = services2.GetRequiredService<IPersonnelRepositoryAsync>();
-                        var inventoryRepository = services2.GetRequiredService<IInventoryRepositoryAsync>();
-                        var eventRepository = services2.GetRequiredService<IEventRepositoryAsync>();
 
-                        await Infrastructure.Persistence.Seeds.DefaultCategories.SeedAsync(categoryRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultAddresses.SeedAsync(addressRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultCertificates.SeedAsync(certificateRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultWorkHistories.SeedAsync(workHistoryRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultEducations.SeedAsync(educationRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultProjects.SeedAsync(projectRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultContacts.SeedAsync(contactRepository);
-
-                        //await EScooterON.WebApi.Infrastructure.Persistence.Seeds.DefaultTrip.SeedAsync(tripRepository);
-                        //await EScooterON.WebApi.Infrastructure.Persistence.Seeds.DefaultFinancialAccounts.SeedAsync   (financialAccountRepository,tripRepository, productRepository,groupRepository,userManager, roleManager, promotionRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultAnnouncements.SeedAsync(announcementRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultPersonnels.SeedAsync(personnelRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultProducts.SeedAsync(productRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultInventories.SeedAsync(inventoryRepository, productRepository);
-                        await Infrastructure.Persistence.Seeds.DefaultEvents.SeedAsync(eventRepository, personnelRepository,addressRepository);
+                        
 
                     }
                     catch (Exception ex)

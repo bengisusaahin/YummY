@@ -41,19 +41,20 @@ namespace WebApi
 
 
                     
-            }); 
+            });
+
             
-            
+
             services.AddSwaggerExtension();
             services.AddControllers();
             services.AddApiVersioningExtension();
             services.AddHealthChecks();
             services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
 
-            services.AddMvc();
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opt =>
-            opt.UseNpgsql(_config.GetConnectionString("DefaultConnection")));
             
+
+
+
 
 
 
