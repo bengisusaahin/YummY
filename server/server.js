@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 app.use(cors());
 app.use(express.json());
@@ -35,6 +36,7 @@ app.delete("/deleteUser/:id", async (req, res) => {
     console.log(err.message);
   }
 });
+
 app.post("/addUser", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
@@ -56,6 +58,34 @@ app.post("/addUser", async (req, res) => {
     }
   } catch (err) {
     console.log(err.message);
+  }
+});
+app.post("/login", async (req, res) => {
+  const users = await pool.query("SELECT * FROM users");
+  const user = users.rows.find((user) => user.user_id === req.body.user_id);
+  console.log(user);
+  //ifelseli kisim logbook icin yapilmis sanki
+  try {
+    if (await bcrypt.compare(req.body.user_password, user.user_password)) {
+      const userId = req.body.user_id;
+      const userToken = { name: userId };
+      const accessToken = generateAccessToken(userToken);
+      const refreshToken = jwt.sign(
+        userToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+      refreshTokens.push(refreshToken);
+      res.json({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        user_id: user.user_id,
+        user_name: user.user_name,
+      });
+    } else {
+      res.send("Not Allowed");
+    }
+  } catch {
+    res.status(500).send();
   }
 });
 app.listen(3002, () => {

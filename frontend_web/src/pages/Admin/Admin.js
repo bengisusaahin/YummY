@@ -195,7 +195,7 @@ const Admin = () => {
           username: usernameRef.current.value,
           email: useremailRef.current.value,
           userrole: userroleRef.current.value,
-          encryptedPassword: "asd",
+          encryptedPassword: "",
         }),
       });
       setIsUserAddedPopUpOpened(false);

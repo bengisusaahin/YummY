@@ -10,7 +10,7 @@ import NavBar from "./components/Layout/NavBar";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   const isAdmin = true;
   const isWaiter = false;
@@ -23,9 +23,10 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      {isLoggedIn && <NavBar />}
       <div style={{ overflowY: "auto", height: "100vh" }}>
         <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
           {!isLoggedIn && <Route path="login" element={<Login />} />}
           {/* ----------------------------- */}
 

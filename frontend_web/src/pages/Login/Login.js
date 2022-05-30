@@ -39,7 +39,7 @@ const Login = (props) => {
       method: "POST",
       body: JSON.stringify({
         user_id: enteredId,
-        user_action: "Login",
+        //user_action: "Login",
         user_password: enteredPassword,
       }),
       headers: {
