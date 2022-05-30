@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const bcrypt = require("bcrypt");
 
 app.use(cors());
 app.use(express.json());
@@ -34,7 +35,29 @@ app.delete("/deleteUser/:id", async (req, res) => {
     console.log(err.message);
   }
 });
+app.post("/addUser", async (req, res) => {
+  try {
+    const salt = await bcrypt.genSalt();
+    const encryptedPassword = await bcrypt.hash(
+      req.body.encryptedPassword,
+      salt
+    );
 
+    const { username, email, userrole } = req.body;
+    const addUser = await pool.query(
+      "INSERT INTO users VALUES (default,$1, $2, $3, $4)",
+      [username, email, userrole, encryptedPassword]
+    );
+
+    if (addUser.rowCount === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(200);
+    }
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 app.listen(3002, () => {
   console.log("Server has started on port 3002");
 });

@@ -12,9 +12,9 @@ const App = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = true;
 
-  const isAdmin = false;
+  const isAdmin = true;
   const isWaiter = false;
-  const isChef = true;
+  const isChef = false;
   const isCashier = false;
 
   const navTo = (comp) => {

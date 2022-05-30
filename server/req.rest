@@ -1,6 +1,15 @@
 GET http://localhost:3002/users_temp
-###
 
+POST http://localhost:3002/addUser
+Content-Type: application/json
+
+{
+  "username": "bengs",
+  "email": "bengs",
+  "userrole": "waiter",
+  "encryptedPassword": "password"
+}
+###
 GET http://localhost:3002/users
 
 
