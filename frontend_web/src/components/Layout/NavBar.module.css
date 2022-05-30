@@ -8,19 +8,23 @@
   padding: 0 0rem;
 }
 .header a {
-  text-decoration: none;
+  display: flex;
+  text-decoration: none !important;
+  color: black;
   font-weight: bold;
+  align-items: center;
   font-size: 20px;
+  width: 300px;
 }
 .logo {
   width: 3em;
   margin: 0;
   margin-right: 1rem;
 }
-.navbar {
-  height: 7.5vh;
+.navBar {
+  height: 100%;
   display: flex;
-  justify-content: space-around;
+
   align-items: center;
   user-select: none;
 }
@@ -30,6 +34,7 @@
 }
 .signoutbar {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   width: 85rem;
 }

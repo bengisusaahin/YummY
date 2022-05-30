@@ -18,8 +18,9 @@ const NavBar = () => {
             className={classes.logo}
             src="https://media.istockphoto.com/vectors/yummy-smile-emoticon-with-tongue-lick-mouth-tasty-food-eating-emoji-vector-id1152863150"
           />
+
+          <a>YummY</a>
         </Link>
-        <a>YummY</a>
       </div>
       <div className={classes.signoutbar}>
         <div className={classes.signout}>
