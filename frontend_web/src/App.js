@@ -12,7 +12,7 @@ const App = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = false;
 
-  const isAdmin = true;
+  const isAdmin = false;
   const isWaiter = false;
   const isChef = true;
   const isCashier = false;

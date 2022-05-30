@@ -49,7 +49,8 @@ const Login = (props) => {
       setIsLoading(false);
 
       if (res.status === 200) {
-        res.json().then((item) => {
+        res.text().then((item) => {
+          //error fixed res.json to res.text but I don't think this is true.
           const expirationTime = new Date(new Date().getTime() + 36000 * 1000);
           authCtx.login(item.accessToken, expirationTime.toISOString());
           //localStorage.setItem("username", enteredName);
