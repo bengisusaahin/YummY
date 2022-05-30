@@ -13,7 +13,7 @@ import Button from "../../components/UI/Button/Button";
 
 const Admin = () => {
   const roles = ["Admin", "Waiter", "Cashier", "Chef"];
-  const rowLength = [1, 2, 3, 2, 3, 1];
+  const rowLength = [2, 3, 4, 2, 1];
   const rowLengthPopUp = [3, 4, 4, 1];
   const [searchValue, setSearchValue] = useState("");
   const [users, setUsers] = useState([]);
@@ -62,13 +62,9 @@ const Admin = () => {
       name: "User Role",
       col: rowLength[3],
     },
-    {
-      name: "Encrypted Password",
-      col: rowLength[4],
-    },
   ];
 
-  headerData[5] = {
+  headerData[4] = {
     name: (
       <IconButton iconButton={<AiOutlineUserAdd />} onClick={popUpHandler} />
     ),
@@ -195,7 +191,7 @@ const Admin = () => {
           username: usernameRef.current.value,
           email: useremailRef.current.value,
           userrole: userroleRef.current.value,
-          encryptedPassword: "",
+          encryptedPassword: "asd",
         }),
       });
       setIsUserAddedPopUpOpened(false);
@@ -250,7 +246,7 @@ const Admin = () => {
                 cSelect={classes.select}
               />
             ),
-            encryptedPassword: data.encryptedPassword,
+
             button: (
               <IconButton
                 onClick={() => deletePopUpHandler(data)}
