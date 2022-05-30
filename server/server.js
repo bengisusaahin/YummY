@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 app.use(cors());
 app.use(express.json());
@@ -35,6 +36,7 @@ app.delete("/deleteUser/:id", async (req, res) => {
     console.log(err.message);
   }
 });
+
 app.post("/addUser", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
@@ -58,8 +60,49 @@ app.post("/addUser", async (req, res) => {
     console.log(err.message);
   }
 });
-app.listen(3002, () => {
-  console.log("Server has started on port 3002");
+let refreshTokens = [];
+
+app.post("/token", (req, res) => {
+  const refreshToken = req.body.token;
+  if (refreshToken == null) return res.sendStatus(401);
+  if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    const accessToken = generateAccessToken({ name: user.userid });
+    res.json({ accessToken: accessToken });
+  });
+});
+app.post("/login", async (req, res) => {
+  const users = await pool.query("SELECT * FROM users");
+  const user = users.rows.find((user) => user.username === req.body.username);
+  console.log(user);
+  if (user == null) {
+    return res.status(400).send("Cannot find user");
+  }
+  try {
+    if (
+      await bcrypt.compare(req.body.encryptedPassword, user.encryptedPassword)
+    ) {
+      const userId = req.body.userid;
+      const userToken = { username: userId };
+      const accessToken = generateAccessToken(userToken);
+      const refreshToken = jwt.sign(
+        userToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+      refreshTokens.push(refreshToken);
+      res.json({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userid: user.userid,
+        username: user.username,
+      });
+    } else {
+      res.send("Not Allowed");
+    }
+  } catch {
+    res.status(500).send();
+  }
 });
 
 app.post("/update_role", async (req, res) => {
@@ -175,4 +218,10 @@ app.post("/confirmOrder", async (req, res) => {
     console.error(err.message);
     res.status(500).send();
   }
+});
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15s" });
+}
+app.listen(3002, () => {
+  console.log("Server has started on port 3002");
 });

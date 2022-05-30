@@ -10,11 +10,11 @@ import NavBar from "./components/Layout/NavBar";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   const isAdmin = true;
   const isWaiter = false;
-  const isChef = false;
+  const isChef = true;
   const isCashier = false;
 
   const navTo = (comp) => {

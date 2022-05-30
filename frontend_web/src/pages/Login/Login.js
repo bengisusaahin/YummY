@@ -6,24 +6,22 @@ import Input from "../../components/UI/Inputs/Input";
 import { RiErrorWarningFill } from "react-icons/ri";
 
 const Login = (props) => {
-  const idInputRef = useRef();
+  const nameInputRef = useRef();
   const passwordInputRef = useRef();
   const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [isidEmpty, setIsidEmpty] = useState(false);
+  const [isNameEmpty, setIsNameEmpty] = useState(false);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const enteredId = idInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
 
-    if (idInputRef.current.value === "") {
-      setIsidEmpty(true);
-      idInputRef.current.focus();
+    if (nameInputRef.current.value === "") {
+      setIsNameEmpty(true);
+      nameInputRef.current.focus();
       return;
     } else {
-      setIsidEmpty(false);
+      setIsNameEmpty(false);
     }
     if (passwordInputRef.current.value === "") {
       setIsPasswordEmpty(true);
@@ -37,14 +35,16 @@ const Login = (props) => {
 
     fetch("http://localhost:3002/login", {
       method: "POST",
-      body: JSON.stringify({
-        user_id: enteredId,
-        //user_action: "Login",
-        user_password: enteredPassword,
-      }),
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        //databasedeki isimleriyle almalisin sol tarafi
+        username: nameInputRef.current.value,
+        //user_action: "Login",
+        encryptedPassword: passwordInputRef.current.value,
+      }),
     }).then((res) => {
       setIsLoading(false);
 
@@ -52,8 +52,8 @@ const Login = (props) => {
         res.json().then((item) => {
           const expirationTime = new Date(new Date().getTime() + 36000 * 1000);
           authCtx.login(item.accessToken, expirationTime.toISOString());
-          localStorage.setItem("user_id", enteredId);
-          localStorage.setItem("user_name", item.user_name);
+          //localStorage.setItem("username", enteredName);
+          localStorage.setItem("username", item.username);
         });
       } else {
         return Promise.reject("server");
@@ -74,13 +74,13 @@ const Login = (props) => {
             type="text"
             label="Username"
             onChange={() => {
-              setIsidEmpty(false);
+              setIsNameEmpty(false);
             }}
-            Icolor={isidEmpty ? "red" : ""}
-            Iref={idInputRef}
+            Icolor={isNameEmpty ? "red" : ""}
+            Iref={nameInputRef}
             height="8.2"
           />
-          {isidEmpty && (
+          {isNameEmpty && (
             <div className={classes.error}>
               <RiErrorWarningFill style={{ marginBottom: "0.2rem" }} />
               <span>Please enter the username</span>
