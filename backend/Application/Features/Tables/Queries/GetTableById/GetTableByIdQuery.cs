@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using AutoMapper;
 namespace Application.Features.Tables.Queries.GetTableById
 {
     public class GetTableByIdQuery : IRequest<Response<Table>>
@@ -17,9 +17,11 @@ namespace Application.Features.Tables.Queries.GetTableById
         public class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, Response<Table>>
         {
             private readonly ITableRepositoryAsync _tableRepository;
-            public GetTableByIdQueryHandler(ITableRepositoryAsync tableRepository)
+            private readonly IMapper _mapper;
+            public GetTableByIdQueryHandler(ITableRepositoryAsync tableRepository,IMapper mapper)
             {
                 _tableRepository = tableRepository;
+                _mapper = mapper;   
             }
             public async Task<Response<Table>> Handle(GetTableByIdQuery query, CancellationToken cancellationToken)
             {

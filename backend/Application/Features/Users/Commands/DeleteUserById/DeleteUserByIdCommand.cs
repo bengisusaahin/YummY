@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Application.Features.Users.Commands.DeleteUserById
 {
@@ -16,9 +17,11 @@ namespace Application.Features.Users.Commands.DeleteUserById
         public class DeleteUserByIdCommandHandler : IRequestHandler<DeleteUserByIdCommand, Response<int>>
         {
             private readonly IUserRepositoryAsync _userRepository;
-            public DeleteUserByIdCommandHandler(IUserRepositoryAsync userRepository)
+            private readonly IMapper _mapper;
+            public DeleteUserByIdCommandHandler(IUserRepositoryAsync userRepository, IMapper mapper)
             {
                 _userRepository = userRepository;
+                _mapper = mapper;
             }
             public async Task<Response<int>> Handle(DeleteUserByIdCommand command, CancellationToken cancellationToken)
             {

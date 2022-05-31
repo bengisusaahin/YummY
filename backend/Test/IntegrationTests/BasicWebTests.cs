@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -62,7 +62,7 @@ namespace IntegrationTests
             Assert.Contains("already taken", stringResponse);
 
         }
-        */
+        
         [Fact]
         public async Task TestCreateProductAsync()
         {

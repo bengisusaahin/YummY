@@ -32,9 +32,9 @@ namespace Application.Features.Orders.Commands.UpdateOrder
                 _mapper = mapper;
             }
 
-            public async Task<Response<int>> Handle(UpdateOrderCommand command, CancellationToken cancellationToken)
+            public async Task<Response<int>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
             {
-                var order = await _orderRepository.GetByIdAsync(command.TableID);
+                var order = await _orderRepository.GetByIdAsync(request.TableID);
 
                 if (order == null)
                 {
@@ -44,7 +44,7 @@ namespace Application.Features.Orders.Commands.UpdateOrder
                 {
                     
 
-                    order = _mapper.Map<Order>(command);
+                    order = _mapper.Map<Order>(request);
                     await _orderRepository.UpdateAsync(order);
                     return new Response<int>(order.Id);
                 }

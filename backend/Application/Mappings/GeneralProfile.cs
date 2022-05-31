@@ -38,6 +38,7 @@ namespace Application.Mappings
             CreateMap<User, GetAllUsersViewModel>().ReverseMap();
             CreateMap<UpdateUserCommand, User>();
             CreateMap<GetAllUsersQuery, GetAllUsersParameter>();
+            
 
 
             CreateMap<Order, GetAllOrdersViewModel>().ReverseMap();

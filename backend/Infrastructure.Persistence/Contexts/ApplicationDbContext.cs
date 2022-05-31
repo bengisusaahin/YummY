@@ -57,6 +57,13 @@ namespace Infrastructure.Persistence.Contexts
             }
             base.OnModelCreating(builder);
 
+            builder.Entity<User>().HasKey(t => t.UserId);
+
+            builder.Entity<Order>().HasKey(x=>x.TableID);
+
+            builder.Entity<Table>().HasKey(c => c.TableId);
+            
+
             
         }
     }

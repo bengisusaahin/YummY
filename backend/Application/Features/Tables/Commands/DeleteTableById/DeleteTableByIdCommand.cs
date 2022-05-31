@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Application.Features.Tables.Commands.DeleteTableById
 {
@@ -16,13 +17,16 @@ namespace Application.Features.Tables.Commands.DeleteTableById
         public class DeleteTableByIdCommandHandler : IRequestHandler<DeleteTableByIdCommand, Response<int>>
         {
             private readonly ITableRepositoryAsync _tableRepository;
-            public DeleteTableByIdCommandHandler(ITableRepositoryAsync tableRepository)
+            private readonly IMapper _mapper;
+            public DeleteTableByIdCommandHandler(ITableRepositoryAsync tableRepository,IMapper mapper)
             {
                 _tableRepository = tableRepository;
-            }
-            public async Task<Response<int>> Handle(DeleteTableByIdCommand command, CancellationToken cancellationToken)
+                _mapper = mapper;
+                
+        }
+            public async Task<Response<int>> Handle(DeleteTableByIdCommand request, CancellationToken cancellationToken)
             {
-                var table = await _tableRepository.GetByIdAsync(command.Id);
+                var table = await _tableRepository.GetByIdAsync(request.Id);
                 if (table == null) throw new ApiException($"Table Not Found.");
                 await _tableRepository.DeleteAsync(table);
                 return new Response<int>(table.Id);
