@@ -40,9 +40,7 @@ const Login = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        //databasedeki isimleriyle almalisin sol tarafi
-        username: nameInputRef.current.value,
-        //user_action: "Login",
+        useremail: nameInputRef.current.value,
         encryptedPassword: passwordInputRef.current.value,
       }),
     }).then((res) => {
@@ -53,8 +51,8 @@ const Login = (props) => {
           //error fixed res.json to res.text but I don't think this is true.
           const expirationTime = new Date(new Date().getTime() + 36000 * 1000);
           authCtx.login(item.accessToken, expirationTime.toISOString());
-          //localStorage.setItem("username", enteredName);
-          localStorage.setItem("username", item.username);
+          //localStorage.setItem("useremail", enteredName);
+          localStorage.setItem("useremail", nameInputRef.current.value);
         });
       } else {
         return Promise.reject("server");
@@ -73,7 +71,7 @@ const Login = (props) => {
         <form onSubmit={submitHandler}>
           <Input
             type="text"
-            label="Username"
+            label="E-mail"
             onChange={() => {
               setIsNameEmpty(false);
             }}
@@ -84,7 +82,7 @@ const Login = (props) => {
           {isNameEmpty && (
             <div className={classes.error}>
               <RiErrorWarningFill style={{ marginBottom: "0.2rem" }} />
-              <span>Please enter the username</span>
+              <span>Please enter your e-mail</span>
             </div>
           )}
           <Input
@@ -101,7 +99,7 @@ const Login = (props) => {
           {isPasswordEmpty && (
             <div className={classes.error}>
               <RiErrorWarningFill style={{ marginBottom: "0.2rem" }} />
-              <span>Please enter the username</span>
+              <span>Please enter your e-mail</span>
             </div>
           )}
           {!isLoading && (

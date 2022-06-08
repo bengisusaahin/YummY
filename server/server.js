@@ -36,19 +36,16 @@ app.delete("/deleteUser/:id", async (req, res) => {
     console.log(err.message);
   }
 });
-
+//
 app.post("/addUser", async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt();
-    const encryptedPassword = await bcrypt.hash(
-      req.body.encryptedPassword,
-      salt
-    );
+    const hashedPassword = await bcrypt.hash(req.body.encryptedPassword);
+    console.log("hashlenmiş parola kullanici kaydedilince: " + hashedPassword);
 
     const { username, email, userrole } = req.body;
     const addUser = await pool.query(
-      "INSERT INTO users VALUES (default,$1, $2, $3, $4)",
-      [username, email, userrole, encryptedPassword]
+      "INSERT INTO users VALUES (default,$1, $2, $3, $4) RETURNING *",
+      [username, email, userrole, hashedPassword]
     );
 
     if (addUser.rowCount === 0) {
@@ -74,8 +71,7 @@ app.post("/token", (req, res) => {
 });
 app.post("/login", async (req, res) => {
   const users = await pool.query("SELECT * FROM users");
-  const user = users.rows.find((user) => user.username === req.body.username);
-  console.log(user);
+  const user = users.rows.find((user) => user.useremail === req.body.useremail);
   if (user == null) {
     return res.status(400).send("Cannot find user");
   }
@@ -97,6 +93,8 @@ app.post("/login", async (req, res) => {
         userid: user.userid,
         username: user.username,
       });
+
+      res.status(200).send();
     } else {
       res.send("Not Allowed");
     }
@@ -132,6 +130,19 @@ app.get("/getSpecificOrder/:id", async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(400);
+  }
+});
+
+app.get("/getRoleByEmail/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getRole = await pool.query(
+      "SELECT userrole FROM users where useremail = $1",
+      [id]
+    );
+    res.json(getRole.rows);
+  } catch (err) {
+    console.error(err.message);
   }
 });
 

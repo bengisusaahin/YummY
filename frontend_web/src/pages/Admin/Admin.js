@@ -101,7 +101,7 @@ const Admin = () => {
             userid: data.userid,
             username: data.username,
             userrole: data.userrole,
-            manager_name: localStorage.getItem("username"),
+            manager_name: localStorage.getItem("useremail"),
             manager_id: localStorage.getItem("userid"),
           }),
         }
@@ -191,7 +191,7 @@ const Admin = () => {
           username: usernameRef.current.value,
           email: useremailRef.current.value,
           userrole: userroleRef.current.value,
-          encryptedPassword: "asd",
+          encryptedPassword: generatedPassword,
         }),
       });
       setIsUserAddedPopUpOpened(false);
@@ -304,7 +304,7 @@ const Admin = () => {
             title="Add User"
             message={
               <>
-                <div>
+                <div style={{ width: "450px", height: "100%" }}>
                   {label("User Name:")}
                   <input
                     className={classes.input}
@@ -333,7 +333,7 @@ const Admin = () => {
                   />
                   <div className={classes.passwordDivGroup}>
                     <div className={classes.passwordArea}>
-                      {generatedPassword}
+                      {label("Generated Password:")} {generatedPassword}
                     </div>
                   </div>
                   <Button

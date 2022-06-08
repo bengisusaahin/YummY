@@ -52,6 +52,7 @@
   font-size: 1.6vh;
 }
 .passwordButtonCss {
+  width: 100% !important;
   margin-top: 10px;
   background-color: white !important;
   color: #db4437 !important;
@@ -63,6 +64,8 @@
   cursor: pointer;
 }
 .saveButtonCss {
+  width: 50% !important;
+
   margin-top: 6px;
   background-color: white !important;
   color: #0f9d58 !important;
@@ -75,6 +78,8 @@
   cursor: pointer;
 }
 .cancelButtonCss {
+  width: 50% !important;
+
   margin-top: 6px;
   background-color: white !important;
   color: #666666 !important;
@@ -84,4 +89,7 @@
   background-color: #575757 !important;
   color: white !important;
   cursor: pointer;
+}
+.saveButtonCss + .cancelButtonCss {
+  margin-left: 15px;
 }
