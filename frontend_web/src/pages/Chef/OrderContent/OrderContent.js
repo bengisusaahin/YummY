@@ -9,10 +9,6 @@ const OrderContent = (props) => {
 
   useEffect(() => {
     getOrderDetails();
-    const interval = setInterval(() => {
-      getOrderDetails();
-    }, 20000);
-    return () => clearInterval(interval);
   }, []);
 
   const getOrderDetails = async () => {
