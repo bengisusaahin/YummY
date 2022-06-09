@@ -39,13 +39,16 @@ app.delete("/deleteUser/:id", async (req, res) => {
 //
 app.post("/addUser", async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.encryptedPassword);
-    console.log("hashlenmiş parola kullanici kaydedilince: " + hashedPassword);
+    const salt = await bcrypt.genSalt();
+    const encryptedPassword = await bcrypt.hash(
+      req.body.encryptedPassword,
+      salt
+    );
 
     const { username, email, userrole } = req.body;
     const addUser = await pool.query(
-      "INSERT INTO users VALUES (default,$1, $2, $3, $4) RETURNING *",
-      [username, email, userrole, hashedPassword]
+      "INSERT INTO users VALUES (default,$1, $2, $3, $4)",
+      [username, email, userrole, encryptedPassword]
     );
 
     if (addUser.rowCount === 0) {
