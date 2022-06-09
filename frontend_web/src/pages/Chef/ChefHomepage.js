@@ -7,10 +7,6 @@ const ChefHomepage = () => {
 
   useEffect(() => {
     getOrders();
-    const interval = setInterval(() => {
-      getOrders();
-    }, 20000);
-    return () => clearInterval(interval);
   }, []);
 
   const getOrders = async () => {
